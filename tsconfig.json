@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+        // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+        "allowSyntheticDefaultImports": true, // 解析非相对模块名的基准目录
+        "baseUrl": ".", // 模块加载兼容模式,可以是呀import from语法导入commonJS模块
+        "esModuleInterop": true, // 从 tslib 导入辅助工具函数（比如 __extends， __rest等）
+        "importHelpers": true, // 指定生成哪个模块系统代码
+        "module": "esnext", // 决定如何处理模块。
+        "moduleResolution": "node", // 启用所有严格类型检查选项。 // 启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict， // --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。
+        "strict": true,
+        "noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时不报错
+        "noUnusedLocals": false, // 有未使用的变量时，不抛出错误
+        "noUnusedParameters": false, // 有未使用的参数时，不抛出错误 // 支持jsx语法
+        "jsx": "preserve", // 生成相应的 .map文件。
+        "sourceMap": true, // 忽略所有的声明文件（ *.d.ts）的类型检查。
+        "skipLibCheck": true, // 指定ECMAScript目标版本
+        "target": "esnext", // 要包含的类型声明文件名列表
+        "types": ["node"],
+        "typeRoots": ["../node_modules/@types"], // isolatedModules 设置为 true 时，如果某个 ts 文件中没有一个import or export 时，ts 则认为这个模块不是一个 ES Module 模块，它被认为是一个全局的脚本，
+        "isolatedModules": true, // 模块名到基于 baseUrl的路径映射的列表。
+        "paths": {
+            "@/*": ["src/*"]
+        }, // 编译过程中需要引入的库文件的列表。
+        "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"]
+    }, // 解析的文件
+    "include": [
+        "env.d.ts",
+        "src/**/*",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "src/*.js",
+        "src/**/*.jsx",
+        "./auto-imports.d.ts"
+    ],
+    "exclude": ["node_modules"],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ]
+}

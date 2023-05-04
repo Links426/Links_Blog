@@ -1,0 +1,33 @@
+{
+  "name": "newtodos",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/nprogress": "^0.2.0",
+    "axios": "0.21.1",
+    "echarts": "^5.4.2",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.32",
+    "vue": "^3.2.45",
+    "vue-echarts": "^6.5.4",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@arco-design/web-vue": "^2.44.4",
+    "@unocss/preset-uno": "^0.50.4",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "typescript": "^4.9.3",
+    "unocss": "^0.50.4",
+    "unplugin-auto-import": "^0.15.2",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.1.0",
+    "vue-tsc": "^1.0.24"
+  }
+}
