@@ -2,9 +2,10 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+import { presetUno, presetAttributify } from 'unocss'
+import Markdown from 'vite-plugin-vue-markdown'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
-import { presetUno, presetAttributify } from 'unocss'
 import path from 'path'
 const resolve = (dir) => path.resolve(__dirname, dir)
 
@@ -12,7 +13,8 @@ const resolve = (dir) => path.resolve(__dirname, dir)
 export default defineConfig({
     base: './', //打包路径
     plugins: [
-        vue(),
+        vue({ include: [/\.vue$/, /\.md$/], reactivityTransform: true }),
+        Markdown(),
         Unocss({
             presets: [presetUno(), presetAttributify()],
             shortcuts: [

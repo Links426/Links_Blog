@@ -60,7 +60,6 @@ caption {
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-    font-size: 14px;
 }
 /** 重置文本格式元素 **/
 a {
@@ -145,4 +144,10 @@ q:after {
 }
 * {
     box-sizing: border-box;
+    font-family: RobotoMono;
+}
+a {
+    text-decoration: none; /* 去除默认的下划线 */
+    outline: none; /* 去除旧版浏览器的点击后的外虚线框 */
+    color: #000; /* 去除默认的颜色和点击后变化的颜色 */
 }

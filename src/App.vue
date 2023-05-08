@@ -1,9 +1,16 @@
 <template>
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+        <Transition>
+            <component :is="Component" />
+        </Transition>
+    </router-view>
 </template>
-<script setup lang="ts">
-import * as echarts from 'echarts'
-provide('echarts', echarts)
-</script>
 
-<style scoped></style>
+<style scoped>
+.v-enter-active {
+    transition: opacity 0.3s ease-in;
+}
+.v-enter-from {
+    opacity: 0;
+}
+</style>

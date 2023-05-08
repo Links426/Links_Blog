@@ -1,153 +1,171 @@
 <template>
-    <a-layout style="height: 100vh">
-        <a-layout-header
-            h-60px
-            flex
-            items-center
-            px-24px
-            justify-between
-            class="header-shadow"
-            ><div flex-center>
-                <img src="@/assets/img/answer.png" w-20px h-28px mr-12px />
-                <span>Mechanical Pro</span>
+    <div class="mx-auto max-w-1000px min-w-600px">
+        <div class="index-bg">
+            <!-- 顶部 -->
+            <div class="w-40% pr-80px">
+                <div font-bold mb-46px h-40px>Links426</div>
+                <div mb-24px text-24px>Hello! I'm Links 🍃</div>
+                <div class="mb-16px">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Integer aliquet, orci in bibendum luctus, turpis ante
+                    pretium velit, eu rutrum augue erat ac eros. Cras ultricies
+                    mattis convallis.
+                </div>
+                <div text-12px mb-32px>EXPLORE ME IN..</div>
+                <div class="text-#282c34 flex">
+                    <div
+                        class="iconfont contactIcon"
+                        :class="item.icon"
+                        v-for="item in contactList"
+                        @mouseenter="enter(item.id)"
+                        @mouseleave="leave(item.id)"
+                    >
+                        <transition name="Fade">
+                            <div
+                                v-show="
+                                    showContactDetail && contactSel === item.id
+                                "
+                                text-16px
+                                pl-10px
+                            >
+                                {{ item.value }}
+                            </div>
+                        </transition>
+                    </div>
+                </div>
             </div>
-            <div>
-                <a-button @click="changeColor">换色黑</a-button>
-                <a-button @click="changeColor1">换色亮</a-button>
-            </div>
-        </a-layout-header>
-        <a-layout>
-            <a-layout-sider
-                breakpoint="lg"
-                :width="220"
-                collapsible
-                :collapsed="collapsed"
-                @collapse="onCollapse"
-            >
-                <div />
-                <a-menu
-                    :defaultOpenKeys="router.currentRoute.value.meta.openKeys"
-                    :defaultSelectedKeys="
-                        router.currentRoute.value.meta.selectKeys
-                    "
-                    @menu-item-click="To"
+            <div class="w-60%">
+                <div flex justify-between justify-center h-40px mb-46px>
+                    <div></div>
+                    <div flex>
+                        <div
+                            :class="
+                                option.id == selOption ? 'index-option-sel' : ''
+                            "
+                            class="index-option-unSel"
+                            v-for="option in optionList"
+                            @click="changePage(option.id)"
+                        >
+                            {{ option.value }}
+                        </div>
+                    </div>
+                </div>
+
+                <div mb-30px text-20px>Recent Posts</div>
+                <div
+                    v-for="item in RawEpisodes"
+                    class="index-blog-card"
+                    h-160px
+                    flex
+                    flex-col
+                    justify-center
                 >
-                    <a-sub-menu key="0">
-                        <template #icon><icon-apps></icon-apps></template>
-                        <template #title>仪表台</template>
-                        <a-menu-item key="0_0">工作台</a-menu-item>
-                    </a-sub-menu>
-                    <a-sub-menu key="1">
-                        <template #icon><icon-apps></icon-apps></template>
-                        <template #title>数据可视化</template>
-                        <a-menu-item key="1_0">分析页</a-menu-item>
-                        <a-menu-item key="1_1">多维数据分析</a-menu-item>
-                    </a-sub-menu>
-                    <a-sub-menu key="2">
-                        <template #icon><icon-apps></icon-apps></template>
-                        <template #title>个人中心</template>
-                        <a-menu-item key="2_0">用户信息</a-menu-item>
-                        <a-menu-item key="2_1">用户设置</a-menu-item>
-                    </a-sub-menu>
-                </a-menu>
-            </a-layout-sider>
-            <a-layout-content class="w-full p-20px content-bg">
-                <a-breadcrumb :routes="routesList" mb-16px>
-                    <template #item-render="{ route, paths }">
-                        <a-link @click="toBrumbPage(paths)">{{
-                            route.meta.label
-                        }}</a-link>
-                    </template>
-                </a-breadcrumb>
-                <router-view v-slot="{ Component }">
-                    <transition name="fade" mode="out-in">
-                        <keep-alive>
-                            <component :is="Component" />
-                        </keep-alive>
-                    </transition>
-                </router-view>
-            </a-layout-content>
-        </a-layout>
-    </a-layout>
+                    <router-link :to="{ name: `Episode/${item.id}` }">
+                        <div class="text-14px text-#777777 mb-18px">
+                            {{ item.date }}
+                        </div>
+                        <div text-19px>{{ item.title }}</div></router-link
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script setup lang="ts">
-const router = useRouter()
+import { getAllEpisode } from '@/utils/episode'
 
-const collapsed = ref(false)
+const RawEpisodes = getAllEpisode()
+const selOption = ref(0)
+const optionList = [
+    { id: 0, value: 'Home' },
+    { id: 1, value: 'Blog' },
+]
 
-const routesList: any = ref([])
-const onCollapse = (val: boolean) => {
-    collapsed.value = val
+const contactList = [
+    {
+        id: 0,
+        icon: 'icon-github-fill',
+        value: 'Links426',
+        url: 'https://github.com/Links426',
+    },
+    {
+        id: 1,
+        icon: 'icon-microsoftoutlook',
+        value: 'links426@outlook.com',
+        url: '',
+    },
+]
+const changePage = (id: number) => {
+    selOption.value = id
 }
+const contactSel = ref(0)
+const showContactDetail = ref(false)
+const enter = (id: number) => {
+    contactSel.value = id
 
-const To = (key: string) => {
-    if (key === '0_0') {
-        router.push('/main')
-    } else if (key === '1_0') {
-        router.push('/data/analyse')
-    } else if (key === '2_0') {
-        router.push('/personal/info')
-    } else if (key === '2_1') {
-        router.push('/personal/setting')
-    }
+    showContactDetail.value = true
 }
+const leave = (id: number) => {
+    contactSel.value = id
 
-const useKeys = ['path', 'meta']
-onBeforeRouteUpdate((to: any) => {
-    const newArr: any = []
-    to.matched.forEach(
-        (item: { [s: string]: unknown } | ArrayLike<unknown>) => {
-            const list = Object.entries(item).filter(([key]) =>
-                useKeys.includes(key)
-            )
-            const newItem = Object.fromEntries(list)
-            newArr.push(newItem)
-        }
-    )
-    routesList.value = newArr
-})
-
-const toBrumbPage = (paths: string | any[]) => {
-    router.push('/' + paths[paths.length - 1])
-}
-
-onMounted(() => {
-    const newArr: any = []
-    router.currentRoute.value.matched.forEach((item) => {
-        const list = Object.entries(item).filter(([key]) =>
-            useKeys.includes(key)
-        )
-        const newItem = Object.fromEntries(list)
-        newArr.push(newItem)
-    })
-    routesList.value = newArr
-})
-
-const changeColor = () => {
-    document.body.setAttribute('arco-theme', 'dark')
-}
-const changeColor1 = () => {
-    document.body.setAttribute('arco-theme', 'light')
+    showContactDetail.value = false
 }
 </script>
 
 <style scoped>
-.header-shadow {
-    z-index: 15;
-    background-color: var(--color-bg-2);
-    color: var(--color-neutral-10);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.content-bg {
-    background-color: var(--color-neutral-1);
-}
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.3s ease;
+.index-bg {
+    padding: 26px 48px 0;
+    display: flex;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.index-option-unSel {
+    cursor: pointer;
+    color: #979797;
+    font-weight: bold;
+    margin-left: 48px;
+    padding-bottom: 12px;
+    transition: all 0.4s;
+}
+.index-option-sel {
+    color: black;
+    transition: all 0.4s;
+}
+.index-blog-card {
+    border-top: 1px solid #dfdfdf;
+}
+.contactIcon {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 22px;
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.contactIcon:hover {
+    color: white;
+    transition: all 0.3s;
+    background-color: #282c34;
+}
+
+.Fade-enter,
+.Fade-leave-to {
     opacity: 0;
+}
+.Fade-enter-to,
+.Fade-leave {
+    opacity: 1;
+}
+
+.Fade-enter-active,
+.Fade-leave-active {
+    transition: all 0.3s;
+}
+a {
+    text-decoration: none; /* 去除默认的下划线 */
+    outline: none; /* 去除旧版浏览器的点击后的外虚线框 */
+    color: #000; /* 去除默认的颜色和点击后变化的颜色 */
 }
 </style>
