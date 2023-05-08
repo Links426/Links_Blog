@@ -1,45 +1,40 @@
 <template>
-    <div
-        h-40px
-        mb-24px
-        flex
-        justify-center
-        justify-between
-        items-center
-        font-bold
-        px-24px
-    >
-        <div>Links</div>
-        <div>{{ episodeContent?.title }}</div>
-    </div>
-    <div v-if="episodeContent" mx-auto max-w-72.917vw>
-        <a-row flex :gutter="12">
-            <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
-                <component :is="episodeContent!.default" />
-            </a-col>
-            <a-col
-                :lg="5"
-                :xl="5"
-                :xxl="5"
-                fixed
-                right-3.646vw
-                top-7.292vw
-                v-show="fullWidth >= 992"
-            >
-                <a-card :title="'目录'">
-                    <div
-                        class="menuItem"
-                        :class="
-                            currentMenuItemSel == item.id ? 'menuItemSel' : ''
-                        "
-                        v-for="item in menuItemList"
-                        @click="toPagePlace(item.point, item.id)"
-                    >
-                        {{ item.txt }}
-                    </div>
-                </a-card>
-            </a-col>
-        </a-row>
+    <div>
+        <div class="episode-header">
+            <div>Links</div>
+            <div>{{ episodeContent?.title }}</div>
+        </div>
+        <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px>
+            <a-row flex>
+                <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
+                    <component :is="episodeContent!.default" />
+                </a-col>
+                <a-col
+                    :lg="5"
+                    :xl="5"
+                    :xxl="5"
+                    fixed
+                    right-50px
+                    top-90px
+                    v-show="fullWidth >= 992"
+                >
+                    <a-card :title="'目录'">
+                        <div
+                            class="menuItem"
+                            :class="
+                                currentMenuItemSel == item.id
+                                    ? 'menuItemSel'
+                                    : ''
+                            "
+                            v-for="item in menuItemList"
+                            @click="toPagePlace(item.point, item.id)"
+                        >
+                            {{ item.txt }}
+                        </div>
+                    </a-card>
+                </a-col>
+            </a-row>
+        </div>
     </div>
 </template>
 
@@ -78,9 +73,11 @@ const menuItemList = ref<
 >([])
 onBeforeMount(() => {
     window.removeEventListener('resize', handleResize)
+    window.removeEventListener('scroll', onScroll)
 })
 onMounted(() => {
     window.addEventListener('resize', handleResize)
+    window.addEventListener('scroll', onScroll)
     getFullMenu()
 })
 const getFullMenu = () => {
@@ -104,13 +101,35 @@ const toPagePlace = (id: string, num: number) => {
     })
 }
 const currentMenuItemSel = ref(0)
+
+const onScroll = () => {
+    const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+    const scrollMiddle = window.innerHeight / 2
+    for (let i = 0; i < menuItemList.value.length; i++) {
+        if (scrollTop + scrollMiddle >= menuItemList.value[i].offsetTop) {
+            currentMenuItemSel.value = menuItemList.value[i].id
+        } else if (scrollTop === 0) {
+            currentMenuItemSel.value = 0
+        } else if (
+            document.documentElement.scrollHeight -
+                document.documentElement.scrollTop ===
+            document.documentElement.clientHeight
+        ) {
+            currentMenuItemSel.value = menuItemList.value.length - 1
+        }
+    }
+}
+console.log(1)
+console.log(1)
+console.log(1)
 </script>
 
 <style scoped>
 .menuItem {
     cursor: pointer;
-    padding: 0.625vw;
-    margin-bottom: 0.417vw;
+    padding: 12px;
+    margin-bottom: 8px;
     transition: all 0.3s;
 }
 .menuItemSel {
@@ -123,5 +142,20 @@ const currentMenuItemSel = ref(0)
 }
 .menuCollapse {
     display: none;
+}
+.episode-header {
+    height: 52px;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.04);
+    background-image: radial-gradient(transparent 1px, #fff 1px);
+    background-size: 4px 4px;
+    backdrop-filter: saturate(50%) blur(4px);
 }
 </style>
