@@ -1,6 +1,19 @@
 <template>
-    <div v-if="episodeContent" mx-auto px-4 mt-5 max-w-83.333vw>
-        <a-row flex :gutter="24">
+    <div
+        h-40px
+        mb-24px
+        flex
+        justify-center
+        justify-between
+        items-center
+        font-bold
+        px-24px
+    >
+        <div>Links</div>
+        <div>{{ episodeContent?.title }}</div>
+    </div>
+    <div v-if="episodeContent" mx-auto max-w-72.917vw>
+        <a-row flex :gutter="12">
             <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
                 <component :is="episodeContent!.default" />
             </a-col>
@@ -9,8 +22,8 @@
                 :xl="5"
                 :xxl="5"
                 fixed
-                right-2.604vw
-                top-1.563vw
+                right-3.646vw
+                top-7.292vw
                 v-show="fullWidth >= 992"
             >
                 <a-card :title="'目录'">
@@ -67,8 +80,6 @@ onBeforeMount(() => {
     window.removeEventListener('resize', handleResize)
 })
 onMounted(() => {
-    window.scrollTo(0, 0)
-
     window.addEventListener('resize', handleResize)
     getFullMenu()
 })

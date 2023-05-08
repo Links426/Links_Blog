@@ -1,9 +1,23 @@
 <template>
     <div class="mx-auto max-w-1000px min-w-600px">
+        <div px-48px my-20px flex justify-between items-center h-40px font-bold>
+            <div>Links426</div>
+
+            <div flex>
+                <div
+                    :class="option.id == selOption ? 'index-option-sel' : ''"
+                    class="index-option-unSel"
+                    v-for="option in optionList"
+                    @click="changePage(option.id)"
+                >
+                    {{ option.value }}
+                </div>
+            </div>
+        </div>
         <div class="index-bg">
             <!-- 顶部 -->
+
             <div class="w-40% pr-80px">
-                <div font-bold mb-46px h-40px>Links426</div>
                 <div mb-24px text-24px>Hello! I'm Links 🍃</div>
                 <div class="mb-16px">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -35,22 +49,6 @@
                 </div>
             </div>
             <div class="w-60%">
-                <div flex justify-between justify-center h-40px mb-46px>
-                    <div></div>
-                    <div flex>
-                        <div
-                            :class="
-                                option.id == selOption ? 'index-option-sel' : ''
-                            "
-                            class="index-option-unSel"
-                            v-for="option in optionList"
-                            @click="changePage(option.id)"
-                        >
-                            {{ option.value }}
-                        </div>
-                    </div>
-                </div>
-
                 <div mb-30px text-20px>Recent Posts</div>
                 <div
                     v-for="item in RawEpisodes"
@@ -123,7 +121,6 @@ const leave = (id: number) => {
     color: #979797;
     font-weight: bold;
     margin-left: 48px;
-    padding-bottom: 12px;
     transition: all 0.4s;
 }
 .index-option-sel {
