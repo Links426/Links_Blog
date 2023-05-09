@@ -4,7 +4,7 @@
             <div>Links</div>
             <div>{{ episodeContent?.title }}</div>
         </div>
-        <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px>
+        <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px mb-100px>
             <a-row flex>
                 <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
                     <component :is="episodeContent!.default" />
@@ -94,35 +94,27 @@ const getFullMenu = () => {
     })
 }
 const toPagePlace = (id: string, num: number) => {
+    window.removeEventListener('scroll', onScroll)
     currentMenuItemSel.value = num
     document.querySelector(`#${id}`)?.scrollIntoView({
         behavior: 'smooth', // 平滑过渡
         block: 'center', // 上边框与视窗顶部平齐
     })
+    window.addEventListener('scroll', onScroll)
 }
 const currentMenuItemSel = ref(0)
 
 const onScroll = () => {
     const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop
-    const scrollMiddle = window.innerHeight / 2
+
     for (let i = 0; i < menuItemList.value.length; i++) {
-        if (scrollTop + scrollMiddle >= menuItemList.value[i].offsetTop) {
-            currentMenuItemSel.value = menuItemList.value[i].id
-        } else if (scrollTop === 0) {
-            currentMenuItemSel.value = 0
-        } else if (
-            document.documentElement.scrollHeight -
-                document.documentElement.scrollTop ===
-            document.documentElement.clientHeight
-        ) {
-            currentMenuItemSel.value = menuItemList.value.length - 1
+        if (menuItemList.value[i].offsetTop > scrollTop) {
+            currentMenuItemSel.value = i
+            break
         }
     }
 }
-console.log(1)
-console.log(1)
-console.log(1)
 </script>
 
 <style scoped>
