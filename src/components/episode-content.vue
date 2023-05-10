@@ -132,9 +132,7 @@ const onScroll = () => {
     transition: all 0.3s;
     border-radius: 0.208vw;
 }
-.menuCollapse {
-    display: none;
-}
+
 .episode-header {
     height: 52px;
     width: 100%;
