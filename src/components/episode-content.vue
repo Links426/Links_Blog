@@ -2,7 +2,7 @@
     <div>
         <div class="episode-header">
             <div>Links</div>
-            <div>{{ episodeContent?.title }}</div>
+            <div>{{ episodeContent?.frontmatter.title }}</div>
         </div>
         <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px mb-100px>
             <a-row flex>
@@ -93,14 +93,18 @@ const getFullMenu = () => {
         item.setAttribute('id', `target_${key}`)
     })
 }
+let timer
 const toPagePlace = (id: string, num: number) => {
+    clearTimeout(timer)
     window.removeEventListener('scroll', onScroll)
     currentMenuItemSel.value = num
     document.querySelector(`#${id}`)?.scrollIntoView({
         behavior: 'smooth', // 平滑过渡
         block: 'center', // 上边框与视窗顶部平齐
     })
-    window.addEventListener('scroll', onScroll)
+    timer = setTimeout(() => {
+        window.addEventListener('scroll', onScroll)
+    }, 2000)
 }
 const currentMenuItemSel = ref(0)
 
