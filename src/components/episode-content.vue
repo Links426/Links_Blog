@@ -193,6 +193,7 @@ const onScroll = () => {
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
+    z-index: 99;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.04);
     background-image: radial-gradient(transparent 1px, #fff 1px);
