@@ -9,6 +9,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@highlightjs/vue-plugin": "^2.1.0",
         "@types/nprogress": "^0.2.0",
         "axios": "0.21.1",
         "github-markdown-css": "^5.2.0",

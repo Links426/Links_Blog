@@ -4,6 +4,10 @@ import ArcoVue from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import router from '@/router'
 import App from './App.vue'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/panda-syntax-light.css'
+
+import 'highlight.js/lib/common'
 
 import 'uno.css'
 
@@ -20,3 +24,9 @@ app.use(ArcoVue)
 app.use(ArcoVueIcon)
 setupStore(app)
 app.mount('#app')
+app.directive('highlight', (el) => {
+    const blocks = el.querySelectorAll('pre code')
+    blocks.forEach((block: any) => {
+        hljs.highlightBlock(block)
+    })
+})
