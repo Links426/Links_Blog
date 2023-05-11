@@ -6,12 +6,12 @@ import router from '@/router'
 import App from './App.vue'
 
 import 'uno.css'
+
 import 'github-markdown-css'
 import '@arco-design/web-vue/dist/arco.css'
 import '@/assets/css/reset.css'
 import 'normalize.css'
 import '@/assets/font/iconfont.css'
-
 
 const app = createApp(App)
 

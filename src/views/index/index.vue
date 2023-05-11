@@ -60,9 +60,11 @@
                 >
                     <router-link :to="{ name: `Episode/${item.id}` }">
                         <div class="text-14px text-#777777 mb-18px">
-                            {{ item.date }}
+                            {{ item.frontmatter.date }}
                         </div>
-                        <div text-19px>{{ item.title }}</div></router-link
+                        <div text-19px>
+                            {{ item.frontmatter.title }}
+                        </div></router-link
                     >
                 </div>
             </div>
