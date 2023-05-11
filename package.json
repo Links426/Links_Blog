@@ -1,33 +1,41 @@
 {
-  "name": "newtodos",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@types/nprogress": "^0.2.0",
-    "axios": "0.21.1",
-    "github-markdown-css": "^5.2.0",
-    "normalize.css": "^8.0.1",
-    "nprogress": "^0.2.0",
-    "pinia": "^2.0.32",
-    "vite-plugin-vue-markdown": "^0.23.0",
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
-  },
-  "devDependencies": {
-    "@arco-design/web-vue": "^2.44.4",
-    "@unocss/preset-uno": "^0.50.4",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "typescript": "^4.9.3",
-    "unocss": "^0.50.4",
-    "unplugin-auto-import": "^0.15.2",
-    "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.1.0",
-    "vue-tsc": "^1.0.24"
-  }
+    "name": "blog",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@highlightjs/vue-plugin": "^2.1.0",
+        "@types/nprogress": "^0.2.0",
+        "axios": "0.21.1",
+        "github-markdown-css": "^5.2.0",
+        "highlight.js": "^11.8.0",
+        "markdown-it": "^13.0.1",
+        "md-powerpack": "^1.0.3",
+        "normalize.css": "^8.0.1",
+        "nprogress": "^0.2.0",
+        "pinia": "^2.0.32",
+        "vite-plugin-vue-markdown": "^0.23.0",
+        "vue": "^3.2.45",
+        "vue-router": "^4.1.6"
+    },
+    "devDependencies": {
+        "@arco-design/web-vue": "^2.44.4",
+        "@unocss/preset-uno": "^0.50.4",
+        "@vitejs/plugin-vue": "^4.0.0",
+        "@yankeeinlondon/code-builder": "^1.2.1",
+        "@yankeeinlondon/link-builder": "^1.2.1",
+        "@yankeeinlondon/meta-builder": "^1.4.0",
+        "typescript": "^4.9.3",
+        "unocss": "^0.50.4",
+        "unplugin-auto-import": "^0.15.2",
+        "unplugin-vue-components": "^0.24.1",
+        "vite": "^4.1.0",
+        "vite-plugin-md": "^0.21.5",
+        "vue-tsc": "^1.0.24"
+    }
 }

@@ -3,10 +3,9 @@ import type { Component } from 'vue'
 export type Person = string | { name: string; link: string }
 
 export interface RawEpisode {
-    date: string
     hosts: Person[]
     guests: Person[]
-    title: string
+    frontmatter: { title: string; date: string }
     description: string
     default: Component
 }
@@ -28,6 +27,6 @@ export const getAllEpisode = () =>
         return {
             ...module,
             id,
-            date: module.date,
+            date: module.frontmatter.date,
         }
     })

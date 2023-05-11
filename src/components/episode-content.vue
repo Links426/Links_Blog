@@ -2,12 +2,12 @@
     <div>
         <div class="episode-header">
             <div>Links</div>
-            <div>{{ episodeContent?.title }}</div>
+            <div>{{ episodeContent?.frontmatter.title }}</div>
         </div>
         <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px mb-100px>
             <a-row flex>
                 <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
-                    <component :is="episodeContent!.default" />
+                    <component :is="episodeContent!.default" v-highlight />
                 </a-col>
                 <a-col
                     :lg="5"
@@ -93,14 +93,18 @@ const getFullMenu = () => {
         item.setAttribute('id', `target_${key}`)
     })
 }
+let timer
 const toPagePlace = (id: string, num: number) => {
+    clearTimeout(timer)
     window.removeEventListener('scroll', onScroll)
     currentMenuItemSel.value = num
     document.querySelector(`#${id}`)?.scrollIntoView({
         behavior: 'smooth', // 平滑过渡
         block: 'center', // 上边框与视窗顶部平齐
     })
-    window.addEventListener('scroll', onScroll)
+    timer = setTimeout(() => {
+        window.addEventListener('scroll', onScroll)
+    }, 2000)
 }
 const currentMenuItemSel = ref(0)
 
@@ -118,6 +122,53 @@ const onScroll = () => {
 </script>
 
 <style scoped>
+@media (prefers-color-scheme: dark) {
+    .markdown-body {
+        color-scheme: light;
+        --color-prettylights-syntax-comment: #6e7781;
+        --color-prettylights-syntax-constant: #0550ae;
+        --color-prettylights-syntax-entity: #8250df;
+        --color-prettylights-syntax-storage-modifier-import: #24292f;
+        --color-prettylights-syntax-entity-tag: #116329;
+        --color-prettylights-syntax-keyword: #cf222e;
+        --color-prettylights-syntax-string: #0a3069;
+        --color-prettylights-syntax-variable: #953800;
+        --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+        --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+        --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+        --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+        --color-prettylights-syntax-carriage-return-bg: #cf222e;
+        --color-prettylights-syntax-string-regexp: #116329;
+        --color-prettylights-syntax-markup-list: #3b2300;
+        --color-prettylights-syntax-markup-heading: #0550ae;
+        --color-prettylights-syntax-markup-italic: #24292f;
+        --color-prettylights-syntax-markup-bold: #24292f;
+        --color-prettylights-syntax-markup-deleted-text: #82071e;
+        --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+        --color-prettylights-syntax-markup-inserted-text: #116329;
+        --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+        --color-prettylights-syntax-markup-changed-text: #953800;
+        --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+        --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+        --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+        --color-prettylights-syntax-meta-diff-range: #8250df;
+        --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+        --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+        --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+        --color-fg-default: #24292f;
+        --color-fg-muted: #57606a;
+        --color-fg-subtle: #6e7781;
+        --color-canvas-default: #ffffff;
+        --color-canvas-subtle: #f6f8fa;
+        --color-border-default: #d0d7de;
+        --color-border-muted: hsla(210, 18%, 87%, 1);
+        --color-neutral-muted: rgba(175, 184, 193, 0.2);
+        --color-accent-fg: #0969da;
+        --color-accent-emphasis: #0969da;
+        --color-attention-subtle: #fff8c5;
+        --color-danger-fg: #cf222e;
+    }
+}
 .menuItem {
     cursor: pointer;
     padding: 12px;
