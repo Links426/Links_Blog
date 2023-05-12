@@ -14,7 +14,7 @@ const resolve = (dir) => path.resolve(__dirname, dir)
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: './', //打包路径
+    base: process.env.NODE_ENV === 'production' ? './' : '/', //打包路径
     plugins: [
         vue({ include: [/\.vue$/, /\.md$/], reactivityTransform: true }),
         Markdown({
