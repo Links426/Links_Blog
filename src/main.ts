@@ -25,6 +25,27 @@ app.use(ArcoVueIcon)
 setupStore(app)
 app.mount('#app')
 app.directive('highlight', (el) => {
+    // 获取页面中的所有 <pre> 元素
+    var pres = document.getElementsByTagName('pre')
+
+    var tags = ['div', 'p', 'span', 'h1', 'h2', 'h3', 'h4']
+
+    for (var i = 0; i < pres.length; i++) {
+        var codes = pres[i].getElementsByTagName('code')
+        for (var j = 0; j < codes.length; j++) {
+            var text = codes[j].textContent
+
+            for (var k = 0; k < tags.length; k++) {
+                var tag = tags[k]
+
+                var regex = new RegExp('</?' + tag + '>', 'g')
+                text = text!.replace(regex, function (match) {
+                    return '&lt;' + match.slice(1, -1) + '&gt;'
+                })
+            }
+            codes[j].textContent = text
+        }
+    }
     const blocks = el.querySelectorAll('pre code')
     blocks.forEach((block: any) => {
         hljs.highlightBlock(block)
