@@ -97,7 +97,7 @@ const getFullMenu = () => {
         item.setAttribute('id', `target_${key}`)
     })
 }
-let timer
+let timer: string | number | NodeJS.Timeout | undefined
 const toPagePlace = (id: string, num: number) => {
     clearTimeout(timer)
     window.removeEventListener('scroll', onScroll)
