@@ -18,7 +18,7 @@
                     top-90px
                     v-show="fullWidth >= 992"
                 >
-                    <a-card :title="'目录'">
+                    <a-card :title="'目录'" max-h-600px overflow-auto>
                         <div
                             class="menuItem"
                             :class="
