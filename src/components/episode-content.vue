@@ -80,6 +80,7 @@ onBeforeMount(() => {
     window.removeEventListener('scroll', onScroll)
 })
 onMounted(() => {
+    console.log(episodes)
     window.addEventListener('resize', handleResize)
     window.addEventListener('scroll', onScroll)
     getFullMenu()
