@@ -10,18 +10,16 @@ const routes: RouteRecordRaw[] = [
         children: [],
     },
 ]
-onMounted(() => {
-    for (const { id } of getAllEpisode()) {
-        routes.push({
-            name: `Episode/${id}`,
-            path: `/episode/${id}`,
-            component: () =>
-                import('@/components/episode-content.vue').then(
-                    ({ default: EpisodeContent }) => {
-                        return h(EpisodeContent, { id })
-                    }
-                ),
-        })
-    }
-})
+for (const { id } of getAllEpisode()) {
+    routes.push({
+        name: `Episode/${id}`,
+        path: `/episode/${id}`,
+        component: () =>
+            import('@/components/episode-content.vue').then(
+                ({ default: EpisodeContent }) => {
+                    return h(EpisodeContent, { id })
+                }
+            ),
+    })
+}
 export default routes
