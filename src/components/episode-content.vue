@@ -26,6 +26,10 @@
                                     ? 'menuItemSel'
                                     : ''
                             "
+                            :style="{
+                                paddingLeft:
+                                    8 * Number(item.type.slice(1)) - 16 + 'px',
+                            }"
                             v-for="item in menuItemList"
                             @click="toPagePlace(item.point, item.id)"
                         >
@@ -93,7 +97,7 @@ const getFullMenu = () => {
         item.setAttribute('id', `target_${key}`)
     })
 }
-let timer
+let timer: string | number | NodeJS.Timeout | undefined
 const toPagePlace = (id: string, num: number) => {
     clearTimeout(timer)
     window.removeEventListener('scroll', onScroll)
@@ -171,7 +175,7 @@ const onScroll = () => {
 }
 .menuItem {
     cursor: pointer;
-    padding: 12px;
+    padding: 8px;
     margin-bottom: 8px;
     transition: all 0.3s;
 }
