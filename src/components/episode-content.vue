@@ -5,6 +5,7 @@
             <div>{{ episodeContent?.frontmatter.title }}</div>
         </div>
         <div v-if="episodeContent" mx-auto max-w-72.917vw py-104px mb-100px>
+            <h1>{{ episodeContent?.frontmatter.title }}</h1>
             <a-row flex>
                 <a-col :xs="24" :sm="24" :md="24" :lg="19" :xl="19" :xxl="19">
                     <component :is="episodeContent!.default" v-highlight />

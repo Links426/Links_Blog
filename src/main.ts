@@ -38,7 +38,7 @@ app.directive('highlight', (el) => {
             for (var k = 0; k < tags.length; k++) {
                 var tag = tags[k]
 
-                var regex = new RegExp('</?' + tag + '>', 'g')
+                var regex = new RegExp('<?' + tag + '/>', 'g')
                 text = text!.replace(regex, function (match) {
                     return '&lt;' + match.slice(1, -1) + '&gt;'
                 })
